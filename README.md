@@ -77,7 +77,20 @@ flowchart TD
 
 ```bash
 # 1. Clone repository and navigate to workspace
-cd c:\CandidateWorkspace
+# 1. Clone the public GitHub repository
+git clone https://github.com/Roshitha8/configflow-etl.git
+
+# 2. Enter the project directory
+cd configflow-etl
+
+# 3. Create a virtual environment
+python -m venv .venv
+
+# 4. Activate it (Windows PowerShell)
+.\.venv\Scripts\Activate.ps1
+
+# 5. Install dependencies
+python -m pip install -r requirements.txt
 
 # 2. (Optional) Create and activate a clean virtual environment
 python -m venv .venv
@@ -296,7 +309,7 @@ Measured on an 8-core Intel CPU running Windows 10 and Python 3.10.6:
 | Workload | Records | Total Time | Throughput | Reconciliation |
 | :--- | :--- | :--- | :--- | :--- |
 | **Starter Dataset (All 3 Datasets)** | 170 rows | 0.0540 s | **3,149.49 rows/sec** | 100% Invariants Passed |
-| **High-Volume Orders Workload** | **100,000 rows** | **5.1186 s** | **19,536.59 rows/sec** | 100% Invariants Passed |
+| **High-Volume Orders Workload** | **100,000 rows** | **5.0713 s** | **19,536.59 rows/sec** | 100% Invariants Passed |
 
 Detailed profiling and optimization analysis are documented in [docs/performance.md](docs/performance.md) and [evidence/benchmark_summary.txt](evidence/benchmark_summary.txt).
 
