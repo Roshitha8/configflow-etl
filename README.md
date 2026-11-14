@@ -233,9 +233,9 @@ When a record fails validation, it is safely quarantined into `rejected_records`
 
 Every run computes and validates two strict mathematical conservation laws:
 1. **Input Conservation:**
-   $$\text{input\_count} = \text{accepted\_count} + \text{rejected\_count}$$
+   `input_count = accepted_count + rejected_count`
 2. **Accepted Granularity:**
-   $$\text{accepted\_count} = \text{inserted\_count} + \text{updated\_count} + \text{skipped\_count}$$
+   `accepted_count = inserted_count + updated_count + skipped_count`
 
 Machine-readable evidence is generated and verified in [evidence/reconciliation.txt](evidence/reconciliation.txt).
 
@@ -276,7 +276,7 @@ pytest -v
 14. `test_14_invalid_product_foreign_key` — Invalid `product_id` quarantined with `INVALID_PRODUCT_FK`.
 15. `test_15_zero_and_negative_quantity` — Zero and negative quantity quarantined with `INVALID_QUANTITY`.
 16. `test_16_negative_price` — Negative unit price quarantined with `NEGATIVE_PRICE`.
-17. `test_17_boundary_monetary_values` — Verifies $0.00 price and drift-free $3 \times \$0.10 = \$0.30$.
+17. `test_17_boundary_monetary_values` — Verifies $0.00 price and drift-free 3 × $0.10 = $0.30.
 18. `test_18_late_out_of_order_events` — Out-of-order timestamp retains latest state and records change history.
 19. `test_19_identical_input_rerun_idempotency` — Idempotent rerun skips identical rows, creating 0 duplicates.
 20. `test_20_upsert_changed_record` — Modifying an existing record updates target table correctly.
