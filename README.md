@@ -1,9 +1,9 @@
-﻿# ConfigFlow ETL â€“ Metadata-Driven Data Ingestion Platform
+# ConfigFlow ETL – Metadata-Driven Data Ingestion Platform
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Tests](https://img.shields.io/badge/tests-28%20passed-brightgreen.svg)](evidence/test_results.txt)
 [![Reconciliation](https://img.shields.io/badge/reconciliation-100%25%20verified-success.svg)](evidence/reconciliation.txt)
-[![Throughput](https://img.shields.io/badge/throughput-19%2C536%20rows%2Fsec-orange.svg)](evidence/benchmark_summary.txt)
+[![Throughput](https://img.shields.io/badge/throughput-19%2C719%20rows%2Fsec-orange.svg)](evidence/benchmark_summary.txt)
 
 > **Production-Minded Metadata-Driven Ingestion Platform** built for the **YottaFlex AI Associate AI Forward Deployed Engineer (FDE) Hackathon**.
 
@@ -14,7 +14,7 @@
 In modern enterprise data platforms, data ingestion pipelines too often devolve into brittle, hardcoded, one-off scripts per dataset. When schemas change, foreign keys break, or load modes shift, data engineering teams face operational debt and pipeline outages.
 
 **ConfigFlow ETL** solves this by separating **metadata declarations** from the **execution engine**:
-- **100% Metadata-Driven:** Source formats (CSV, JSON), target tables, primary keys, foreign keys, load modes (`append`, `upsert`, `replace`), domain validation rules, and transformations are declared in JSON metadataâ€”never hardcoded in application logic.
+- **100% Metadata-Driven:** Source formats (CSV, JSON), target tables, primary keys, foreign keys, load modes (`append`, `upsert`, `replace`), domain validation rules, and transformations are declared in JSON metadata—never hardcoded in application logic.
 - **Strict Data Quality & Lineage:** Corrupt or non-compliant records are safely partitioned into a quarantine ledger with exact root-cause reason codes (`INVALID_QUANTITY`, `NEGATIVE_PRICE`, `DUPLICATE_KEY_TARGET`, `INVALID_CUSTOMER_FK`).
 - **Mathematical Reconciliation:** Enforces strict conservation laws ($Input = Accepted + Rejected$; $Accepted = Inserted + Updated + Skipped$).
 - **ACID Reliability:** Parameterized SQL execution, atomic rollback on failure, shadow staging for atomic replacement, and durable audit tracking.
@@ -25,9 +25,9 @@ In modern enterprise data platforms, data ingestion pipelines too often devolve 
 
 ConfigFlow is structured into **exactly three main application files**, strictly separating concerns:
 
-1. [frontend.py](frontend.py) â€” **Presentation Tier (Streamlit UI):** Interactive visual console providing pipeline controls, operational metric cards, target table previews, quarantine drill-downs, order change history, and reconciliation status. Calls backend APIs and contains zero ETL logic.
-2. [backend.py](backend.py) â€” **Engine Tier (Ingestion & ETL Core):** Generic metadata validator, safe stream/batch file reader, schema validator, domain rule evaluator, deduplication engine, and dependency orchestrator. Runs completely standalone via CLI without Streamlit.
-3. [database.py](database.py) â€” **Persistence & Audit Tier (SQLite Storage):** Schema initialization, parameterized query execution, strict SQL identifier validation, foreign key enforcement (`PRAGMA foreign_keys=ON`), atomic transactional persistence, and durable audit logging.
+1. [frontend.py](frontend.py) — **Presentation Tier (Streamlit UI):** Interactive visual console providing pipeline controls, operational metric cards, target table previews, quarantine drill-downs, order change history, and reconciliation status. Calls backend APIs and contains zero ETL logic.
+2. [backend.py](backend.py) — **Engine Tier (Ingestion & ETL Core):** Generic metadata validator, safe stream/batch file reader, schema validator, domain rule evaluator, deduplication engine, and dependency orchestrator. Runs completely standalone via CLI without Streamlit.
+3. [database.py](database.py) — **Persistence & Audit Tier (SQLite Storage):** Schema initialization, parameterized query execution, strict SQL identifier validation, foreign key enforcement (`PRAGMA foreign_keys=ON`), atomic transactional persistence, and durable audit logging.
 
 ```mermaid
 flowchart TD
@@ -75,30 +75,21 @@ flowchart TD
 
 ## 4. Clean Installation & Setup
 
-```bash
-# 1. Clone repository and navigate to workspace
+```powershell
 # 1. Clone the public GitHub repository
 git clone https://github.com/Roshitha8/configflow-etl.git
 
 # 2. Enter the project directory
 cd configflow-etl
 
-# 3. Create a virtual environment
+# 3. Create a clean virtual environment
 python -m venv .venv
 
-# 4. Activate it (Windows PowerShell)
+# 4. Activate the virtual environment (Windows PowerShell)
 .\.venv\Scripts\Activate.ps1
 
-# 5. Install dependencies
+# 5. Install pinned dependencies
 python -m pip install -r requirements.txt
-
-# 2. (Optional) Create and activate a clean virtual environment
-python -m venv .venv
-.venv\Scripts\activate   # On Windows
-# source .venv/bin/activate # On Linux/macOS
-
-# 3. Install dependencies
-pip install -r requirements.txt
 ```
 
 ---
@@ -269,34 +260,34 @@ pytest -v
 ```
 
 ### Test Coverage Matrix (28/28 Passed)
-1. `test_01_valid_csv_ingestion` â€” Clean CSV load, metrics verification.
-2. `test_02_valid_json_ingestion` â€” Clean JSON load, metrics verification.
-3. `test_03_empty_batch` â€” Empty 0-byte file handling.
-4. `test_04_malformed_csv` â€” Row with uneven columns quarantined with `MALFORMED_ROW`.
-5. `test_05_malformed_json` â€” Syntax corruption caught, fails batch safely.
-6. `test_06_missing_required_field` â€” Missing non-nullable column quarantined with `MISSING_REQUIRED_FIELD`.
-7. `test_07_null_primary_key` â€” Null primary key quarantined with `NULL_PRIMARY_KEY`.
-8. `test_08_duplicate_source_key` â€” In-batch duplicate quarantined with `DUPLICATE_KEY_IN_BATCH`.
-9. `test_09_duplicate_target_key` â€” Append target duplicate quarantined with `DUPLICATE_KEY_TARGET`.
-10. `test_10_unexpected_extra_schema_column` â€” Extra column fails batch when `allow_extra_columns: false`.
-11. `test_11_missing_schema_column` â€” Missing required schema column fails batch safely.
-12. `test_12_wrong_data_type` â€” String in numeric column quarantined with `WRONG_DATA_TYPE`.
-13. `test_13_invalid_customer_foreign_key` â€” Invalid `customer_id` quarantined with `INVALID_CUSTOMER_FK`.
-14. `test_14_invalid_product_foreign_key` â€” Invalid `product_id` quarantined with `INVALID_PRODUCT_FK`.
-15. `test_15_zero_and_negative_quantity` â€” Zero and negative quantity quarantined with `INVALID_QUANTITY`.
-16. `test_16_negative_price` â€” Negative unit price quarantined with `NEGATIVE_PRICE`.
-17. `test_17_boundary_monetary_values` â€” Verifies $0.00 price and drift-free $3 \times \$0.10 = \$0.30$.
-18. `test_18_late_out_of_order_events` â€” Out-of-order timestamp retains latest state and records change history.
-19. `test_19_identical_input_rerun_idempotency` â€” Idempotent rerun skips identical rows, creating 0 duplicates.
-20. `test_20_upsert_changed_record` â€” Modifying an existing record updates target table correctly.
-21. `test_21_append_semantics` â€” Rejects duplicate business keys, inserts only fresh records.
-22. `test_22_atomic_replace` â€” Staging table swap replaces target; failure preserves previous good state.
-23. `test_23_injected_partial_database_failure_and_retry` â€” Simulated crash rolls back; retry succeeds.
-24. `test_24_reconciliation_invariants` â€” Mathematical invariants verified on mixed batch.
-25. `test_25_audit_log_correctness` â€” `pipeline_runs` table timestamps, status, and counts validated.
-26. `test_26_quarantine_traceability` â€” Quarantined rows contain full audit lineage.
-27. `test_27_config_validation_and_unsafe_identifiers` â€” Rejects SQL injection attempts in table/column names.
-28. `test_28_large_data_generation_determinism` â€” Deterministic generation with seed 42.
+1. `test_01_valid_csv_ingestion` — Clean CSV load, metrics verification.
+2. `test_02_valid_json_ingestion` — Clean JSON load, metrics verification.
+3. `test_03_empty_batch` — Empty 0-byte file handling.
+4. `test_04_malformed_csv` — Row with uneven columns quarantined with `MALFORMED_ROW`.
+5. `test_05_malformed_json` — Syntax corruption caught, fails batch safely.
+6. `test_06_missing_required_field` — Missing non-nullable column quarantined with `MISSING_REQUIRED_FIELD`.
+7. `test_07_null_primary_key` — Null primary key quarantined with `NULL_PRIMARY_KEY`.
+8. `test_08_duplicate_source_key` — In-batch duplicate quarantined with `DUPLICATE_KEY_IN_BATCH`.
+9. `test_09_duplicate_target_key` — Append target duplicate quarantined with `DUPLICATE_KEY_TARGET`.
+10. `test_10_unexpected_extra_schema_column` — Extra column fails batch when `allow_extra_columns: false`.
+11. `test_11_missing_schema_column` — Missing required schema column fails batch safely.
+12. `test_12_wrong_data_type` — String in numeric column quarantined with `WRONG_DATA_TYPE`.
+13. `test_13_invalid_customer_foreign_key` — Invalid `customer_id` quarantined with `INVALID_CUSTOMER_FK`.
+14. `test_14_invalid_product_foreign_key` — Invalid `product_id` quarantined with `INVALID_PRODUCT_FK`.
+15. `test_15_zero_and_negative_quantity` — Zero and negative quantity quarantined with `INVALID_QUANTITY`.
+16. `test_16_negative_price` — Negative unit price quarantined with `NEGATIVE_PRICE`.
+17. `test_17_boundary_monetary_values` — Verifies $0.00 price and drift-free $3 \times \$0.10 = \$0.30$.
+18. `test_18_late_out_of_order_events` — Out-of-order timestamp retains latest state and records change history.
+19. `test_19_identical_input_rerun_idempotency` — Idempotent rerun skips identical rows, creating 0 duplicates.
+20. `test_20_upsert_changed_record` — Modifying an existing record updates target table correctly.
+21. `test_21_append_semantics` — Rejects duplicate business keys, inserts only fresh records.
+22. `test_22_atomic_replace` — Staging table swap replaces target; failure preserves previous good state.
+23. `test_23_injected_partial_database_failure_and_retry` — Simulated crash rolls back; retry succeeds.
+24. `test_24_reconciliation_invariants` — Mathematical invariants verified on mixed batch.
+25. `test_25_audit_log_correctness` — `pipeline_runs` table timestamps, status, and counts validated.
+26. `test_26_quarantine_traceability` — Quarantined rows contain full audit lineage.
+27. `test_27_config_validation_and_unsafe_identifiers` — Rejects SQL injection attempts in table/column names.
+28. `test_28_large_data_generation_determinism` — Deterministic generation with seed 42.
 
 Real test run output is stored in [evidence/test_results.txt](evidence/test_results.txt).
 
@@ -308,8 +299,8 @@ Measured on an 8-core Intel CPU running Windows 10 and Python 3.10.6:
 
 | Workload | Records | Total Time | Throughput | Reconciliation |
 | :--- | :--- | :--- | :--- | :--- |
-| **Starter Dataset (All 3 Datasets)** | 170 rows | 0.0540 s | **3,149.49 rows/sec** | 100% Invariants Passed |
-| **High-Volume Orders Workload** | **100,000 rows** | **5.0713 s** | **19,536.59 rows/sec** | 100% Invariants Passed |
+| **Starter Dataset (All 3 Datasets)** | 170 rows | 0.0509 s | **3,338.57 rows/sec** | 100% Invariants Passed |
+| **High-Volume Orders Workload** | **100,000 rows** | **5.0713 s** | **19,718.81 rows/sec** | 100% Invariants Passed |
 
 Detailed profiling and optimization analysis are documented in [docs/performance.md](docs/performance.md) and [evidence/benchmark_summary.txt](evidence/benchmark_summary.txt).
 
@@ -357,4 +348,3 @@ print([dict(r) for r in conn.execute(query2).fetchall()])
 1. **Streaming Generator / Arrow Engine:** Integrate Apache Arrow or Polars to stream arbitrary file sizes with constant memory utilization.
 2. **Distributed Sink Connectors:** Add metadata target drivers for PostgreSQL, Snowflake, or ClickHouse using the same declarative schema interfaces.
 3. **Data Contract Registry:** Expose schema JSONs via a Schema Registry with semantic versioning and backward compatibility validation.
-
