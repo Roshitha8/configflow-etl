@@ -1,0 +1,34 @@
+================================================================================
+CONFIGFLOW ETL PLATFORM - EMPIRICAL BENCHMARK EVIDENCE REPORT
+================================================================================
+Generated: 2026-11-14T09:40:05.696233+00:00
+
+SYSTEM CONTEXT:
+- Operating System: Windows 10 (10.0.26200)
+- Processor: Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
+- CPU Cores: 8
+- Python Version: 3.10.6
+
+BENCHMARK 1: STARTER DATASET (BASELINE)
+- Total Datasets: 3 (customers, products, orders)
+- Total Input Rows: 170
+- Total Elapsed Time: 0.0509 seconds
+- Starter Throughput: 3338.57 records/second
+
+BENCHMARK 2: HIGH-VOLUME WORKLOAD (100,000 ORDERS)
+- Customers (1,000 rows): 0.0485 s (20618.56 rows/s)
+- Products (100 rows): 0.0231 s (4329.00 rows/s)
+- Orders (100,000 rows): 5.0713 s (19718.81 rows/s)
+- Total Batch Time: 5.2571 seconds
+
+RECONCILIATION INVARIANTS ON BENCHMARK DATA:
+- Input Conservation (input = accepted + rejected): PASSED
+- Accepted Granularity (accepted = inserted + updated + skipped): PASSED
+- Target Orders Table Row Count: 100,000
+- Quarantined Rejects Count: 0
+
+PLAUSIBLE PRODUCTION OPTIMIZATIONS:
+1. Chunked stream reading for >10M rows to bound memory footprint.
+2. In-memory temporary tables with SQLite synchronous=OFF during initial bulk staging.
+3. Multi-worker parallel validation across non-overlapping partitions before single transaction commit.
+================================================================================

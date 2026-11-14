@@ -1,0 +1,62 @@
+================================================================================
+CONFIGFLOW ETL PLATFORM - RECONCILIATION & AUDIT VERIFICATION REPORT
+================================================================================
+Generated: 2026-11-14T09:39:31.966727+00:00
+Target Warehouse: C:\CandidateWorkspace\data\warehouse.db
+
+RECONCILIATION LEDGER BY PIPELINE RUN:
+RUN ID             DATASET      MODE     STATUS           INPUT  ACC    REJ    INS    UPD    SKP    RECONCILED
+---------------------------------------------------------------------------------------------------------
+RUN-AB322C9636A5   orders       append   PARTIAL_SUCCESS  100    0      100    0      0      0      True      
+RUN-41BAB25F91D2   products     upsert   SUCCESS          20     20     0      0      0      20     True      
+RUN-A532FD01095B   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-075AE4BF8168   products     replace  SUCCESS          20     20     0      20     0      0      True      
+RUN-17782D77F047   products     replace  FAILED           0      0      0      0      0      0      True      
+RUN-03C52C4DBB8B   products     replace  FAILED           0      0      0      0      0      0      True      
+RUN-8A404490FE1C   products     replace  FAILED           0      0      0      0      0      0      True      
+RUN-9260EACE3809   orders       append   PARTIAL_SUCCESS  100    0      100    0      0      0      True      
+RUN-43D2295D1E28   products     upsert   SUCCESS          20     20     0      0      0      20     True      
+RUN-43F288FC12DC   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-6AA8FF3F5572   orders       append   PARTIAL_SUCCESS  100    0      100    0      0      0      True      
+RUN-AAE4779EB39B   products     upsert   SUCCESS          20     20     0      0      0      20     True      
+RUN-4E6F5417A520   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-006EDC623DC0   orders       append   PARTIAL_SUCCESS  100    0      100    0      0      0      True      
+RUN-FF06365C03FB   products     upsert   SUCCESS          20     20     0      0      0      20     True      
+RUN-D6E2804C275E   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-044ED0E4CD17   orders       append   PARTIAL_SUCCESS  100    0      100    0      0      0      True      
+RUN-CC32B0FF6288   products     upsert   SUCCESS          20     20     0      0      0      20     True      
+RUN-357A439F7860   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-55BF5041FC13   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-01656C8B410C   orders       append   PARTIAL_SUCCESS  100    0      100    0      0      0      True      
+RUN-152F497A0285   products     upsert   SUCCESS          20     20     0      0      0      20     True      
+RUN-D2A79D038FC5   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-673E923A5341   orders       append   SUCCESS          100    100    0      100    0      0      True      
+RUN-40C3A6C6A399   products     upsert   SUCCESS          20     20     0      0      0      20     True      
+RUN-634FA0A634AD   customers    upsert   SUCCESS          50     50     0      0      0      50     True      
+RUN-4CDA87133332   products     upsert   SUCCESS          20     20     0      20     0      0      True      
+RUN-3804A495BF4E   products     upsert   FAILED           0      0      0      0      0      0      True      
+RUN-53772E0164C1   orders       append   FAILED           0      0      0      0      0      0      True      
+RUN-AB80BBBD3DC1   products     upsert   FAILED           0      0      0      0      0      0      True      
+RUN-BE1CB7281033   customers    upsert   SUCCESS          50     50     0      50     0      0      True      
+
+MATHEMATICAL INVARIANTS STATUS:
+1. Input Conservation (input = accepted + rejected): PASSED
+2. Accepted Granularity (accepted = inserted + updated + skipped): PASSED
+
+QUARANTINED REJECTS AUDIT TRAIL (50 records sampled):
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000100' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000099' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000098' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000097' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000096' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000095' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000094' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000093' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000092' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000091' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000090' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000089' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000088' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000087' already exists in target table 'orders'. Append rejected duplicate business key.
+- Run: RUN-AB322C9636A5 | Table: orders | Row: None | Code: DUPLICATE_KEY_TARGET | Detail: Record with primary key 'ORD-0000086' already exists in target table 'orders'. Append rejected duplicate business key.
+================================================================================

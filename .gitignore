@@ -1,0 +1,36 @@
+# Python virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local databases and runtime data
+*.db
+*.sqlite
+*.sqlite3
+data/benchmark/
+data/large/
+data/generated/
+
+# Environment and secrets
+.env
+*.pem
+*.key
+
+# Logs
+*.log
+logs/
+
+# Streamlit
+.streamlit/

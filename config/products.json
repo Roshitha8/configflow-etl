@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_name": "products",
+  "description": "Product catalog dimension metadata with pricing and catalog status.",
+  "source": {
+    "path": "data/starter/products.json",
+    "format": "json"
+  },
+  "target": {
+    "table": "products",
+    "load_mode": "upsert"
+  },
+  "primary_key": ["product_id"],
+  "columns": {
+    "product_id": {
+      "type": "string",
+      "nullable": false,
+      "description": "Unique SKU product identifier (e.g. PROD-00001)"
+    },
+    "product_name": {
+      "type": "string",
+      "nullable": false,
+      "description": "Descriptive catalog name of the product"
+    },
+    "unit_price": {
+      "type": "decimal",
+      "nullable": false,
+      "description": "Base unit price in USD (2 decimal places)"
+    },
+    "active": {
+      "type": "boolean",
+      "nullable": false,
+      "description": "Flag indicating if product is actively offered for sale"
+    }
+  },
+  "required_fields": ["product_id", "product_name", "unit_price", "active"],
+  "foreign_keys": [],
+  "transformations": [],
+  "validation_rules": [
+    {
+      "column": "unit_price",
+      "rule": "min_value",
+      "min": "0.00"
+    }
+  ],
+  "allow_extra_columns": false,
+  "batch_dedup_policy": "first-wins",
+  "dependencies": []
+}

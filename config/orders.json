@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_name": "orders",
+  "description": "Transactional order line events referencing customers and products.",
+  "source": {
+    "path": "data/starter/orders.csv",
+    "format": "csv",
+    "options": {
+      "delimiter": ",",
+      "has_header": true,
+      "encoding": "utf-8"
+    }
+  },
+  "target": {
+    "table": "orders",
+    "load_mode": "append"
+  },
+  "primary_key": ["order_id"],
+  "columns": {
+    "order_id": {
+      "type": "string",
+      "nullable": false,
+      "description": "Unique order transaction identifier (e.g. ORD-00001)"
+    },
+    "customer_id": {
+      "type": "string",
+      "nullable": false,
+      "description": "Foreign key reference to customers table"
+    },
+    "product_id": {
+      "type": "string",
+      "nullable": false,
+      "description": "Foreign key reference to products table"
+    },
+    "quantity": {
+      "type": "integer",
+      "nullable": false,
+      "description": "Quantity purchased; must be strictly greater than 0"
+    },
+    "unit_price": {
+      "type": "decimal",
+      "nullable": false,
+      "description": "Transaction unit price in USD"
+    },
+    "order_timestamp": {
+      "type": "timestamp",
+      "nullable": false,
+      "description": "ISO8601 transaction occurrence timestamp"
+    }
+  },
+  "required_fields": [
+    "order_id",
+    "customer_id",
+    "product_id",
+    "quantity",
+    "unit_price",
+    "order_timestamp"
+  ],
+  "foreign_keys": [
+    {
+      "column": "customer_id",
+      "reference_table": "customers",
+      "reference_column": "customer_id"
+    },
+    {
+      "column": "product_id",
+      "reference_table": "products",
+      "reference_column": "product_id"
+    }
+  ],
+  "transformations": [
+    {
+      "target_column": "total_amount",
+      "type": "multiply_decimal",
+      "operand1": "quantity",
+      "operand2": "unit_price",
+      "decimals": 2,
+      "description": "total_amount = quantity * unit_price quantized to 2 decimal places"
+    }
+  ],
+  "validation_rules": [
+    {
+      "column": "quantity",
+      "rule": "min_value",
+      "min": 1
+    },
+    {
+      "column": "unit_price",
+      "rule": "min_value",
+      "min": "0.00"
+    }
+  ],
+  "allow_extra_columns": false,
+  "batch_dedup_policy": "first-wins",
+  "dependencies": ["customers", "products"]
+}

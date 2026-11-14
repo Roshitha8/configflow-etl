@@ -1,0 +1,3 @@
+customer_id,customer_name,email,created_at
+CUST-00001,Valid Name,valid@example.com,2026-01-01T10:00:00Z
+CUST-00002,Too,Few,Columns

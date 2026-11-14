@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_name": "customers",
+  "description": "Customer dimension metadata and contact information.",
+  "source": {
+    "path": "data/starter/customers.csv",
+    "format": "csv",
+    "options": {
+      "delimiter": ",",
+      "has_header": true,
+      "encoding": "utf-8"
+    }
+  },
+  "target": {
+    "table": "customers",
+    "load_mode": "upsert"
+  },
+  "primary_key": ["customer_id"],
+  "columns": {
+    "customer_id": {
+      "type": "string",
+      "nullable": false,
+      "description": "Unique business identifier for customer (e.g. CUST-00001)"
+    },
+    "customer_name": {
+      "type": "string",
+      "nullable": false,
+      "description": "Full legal or commercial name of the customer"
+    },
+    "email": {
+      "type": "string",
+      "nullable": true,
+      "description": "Electronic contact address"
+    },
+    "created_at": {
+      "type": "timestamp",
+      "nullable": false,
+      "description": "ISO8601 registration timestamp"
+    }
+  },
+  "required_fields": ["customer_id", "customer_name", "created_at"],
+  "foreign_keys": [],
+  "transformations": [],
+  "validation_rules": [
+    {
+      "column": "email",
+      "rule": "regex",
+      "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+      "nullable_ok": true
+    }
+  ],
+  "allow_extra_columns": false,
+  "batch_dedup_policy": "first-wins",
+  "dependencies": []
+}

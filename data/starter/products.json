@@ -1,0 +1,122 @@
+[
+  {
+    "product_id": "PROD-00001",
+    "product_name": "Yotta-Industrial Switch V2",
+    "unit_price": 22.34,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00002",
+    "product_name": "Yotta-Compute Module V3",
+    "unit_price": 39.69,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00003",
+    "product_name": "Yotta-Processor Board V4",
+    "unit_price": 57.04,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00004",
+    "product_name": "Yotta-Power Supply V5",
+    "unit_price": 74.39,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00005",
+    "product_name": "Yotta-Sensor Node V1",
+    "unit_price": 91.74,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00006",
+    "product_name": "Yotta-Memory Card V2",
+    "unit_price": 109.09,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00007",
+    "product_name": "Yotta-Optical Transceiver V3",
+    "unit_price": 126.44,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00008",
+    "product_name": "Yotta-Edge Gateway V4",
+    "unit_price": 143.79,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00009",
+    "product_name": "Yotta-Industrial Switch V5",
+    "unit_price": 161.14,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00010",
+    "product_name": "Yotta-Compute Module V1",
+    "unit_price": 178.49,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00011",
+    "product_name": "Yotta-Processor Board V2",
+    "unit_price": 195.84,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00012",
+    "product_name": "Yotta-Power Supply V3",
+    "unit_price": 213.19,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00013",
+    "product_name": "Yotta-Sensor Node V4",
+    "unit_price": 230.54,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00014",
+    "product_name": "Yotta-Memory Card V5",
+    "unit_price": 247.89,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00015",
+    "product_name": "Yotta-Optical Transceiver V1",
+    "unit_price": 265.24,
+    "active": false
+  },
+  {
+    "product_id": "PROD-00016",
+    "product_name": "Yotta-Edge Gateway V2",
+    "unit_price": 282.59,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00017",
+    "product_name": "Yotta-Industrial Switch V3",
+    "unit_price": 299.94,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00018",
+    "product_name": "Yotta-Compute Module V4",
+    "unit_price": 317.29,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00019",
+    "product_name": "Yotta-Processor Board V5",
+    "unit_price": 334.64,
+    "active": true
+  },
+  {
+    "product_id": "PROD-00020",
+    "product_name": "Yotta-Power Supply V1",
+    "unit_price": 351.99,
+    "active": true
+  }
+]

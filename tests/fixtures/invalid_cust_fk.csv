@@ -1,0 +1,2 @@
+order_id,customer_id,product_id,quantity,unit_price,order_timestamp
+ORD-00001,CUST-99999,PROD-00001,2,19.99,2026-01-01T10:00:00Z

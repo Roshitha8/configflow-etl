@@ -1,0 +1,104 @@
+{
+  "description": "ConfigFlow ETL Invalid & Boundary Fixtures Manifest",
+  "generated_at": "2026-11-14T09:04:21.771518+00:00",
+  "fixtures": {
+    "empty_csv": {
+      "file": "empty.csv",
+      "format": "csv",
+      "expected_status": "SUCCESS",
+      "expected_input_count": 0,
+      "expected_rejected_count": 0,
+      "description": "Completely empty 0-byte CSV file"
+    },
+    "empty_json": {
+      "file": "empty.json",
+      "format": "json",
+      "expected_status": "SUCCESS",
+      "expected_input_count": 0,
+      "expected_rejected_count": 0,
+      "description": "Empty JSON array []"
+    },
+    "malformed_csv_row": {
+      "file": "malformed_row.csv",
+      "format": "csv",
+      "expected_status": "PARTIAL_SUCCESS",
+      "expected_rejected_code": "MALFORMED_ROW",
+      "description": "Row with uneven comma/column count"
+    },
+    "malformed_json_syntax": {
+      "file": "malformed_syntax.json",
+      "format": "json",
+      "expected_status": "FAILED",
+      "expected_failure_substring": "Malformed JSON",
+      "description": "Invalid JSON syntax causing batch parse failure"
+    },
+    "missing_required_field": {
+      "file": "missing_required.csv",
+      "format": "csv",
+      "expected_rejected_code": "MISSING_REQUIRED_FIELD",
+      "description": "Record missing non-nullable customer_name"
+    },
+    "null_primary_key": {
+      "file": "null_pk.csv",
+      "format": "csv",
+      "expected_rejected_code": "NULL_PRIMARY_KEY",
+      "description": "Record with empty primary key string"
+    },
+    "duplicate_source_key": {
+      "file": "duplicate_key.csv",
+      "format": "csv",
+      "expected_rejected_code": "DUPLICATE_KEY_IN_BATCH",
+      "description": "Two rows sharing identical primary key in same batch"
+    },
+    "unexpected_extra_column": {
+      "file": "extra_column.csv",
+      "format": "csv",
+      "expected_status": "FAILED",
+      "expected_failure_substring": "Unexpected extra columns",
+      "description": "CSV with unauthorized extra column discount_pct"
+    },
+    "missing_schema_column": {
+      "file": "missing_col.csv",
+      "format": "csv",
+      "expected_status": "FAILED",
+      "expected_failure_substring": "Missing required columns in CSV header",
+      "description": "CSV header missing required column customer_name"
+    },
+    "wrong_data_type": {
+      "file": "wrong_type.csv",
+      "format": "csv",
+      "expected_rejected_code": "WRONG_DATA_TYPE",
+      "description": "Quantity containing string 'NOT_AN_INT'"
+    },
+    "invalid_customer_fk": {
+      "file": "invalid_cust_fk.csv",
+      "format": "csv",
+      "expected_rejected_code": "INVALID_CUSTOMER_FK",
+      "description": "Order referencing non-existent customer CUST-99999"
+    },
+    "invalid_product_fk": {
+      "file": "invalid_prod_fk.csv",
+      "format": "csv",
+      "expected_rejected_code": "INVALID_PRODUCT_FK",
+      "description": "Order referencing non-existent product PROD-99999"
+    },
+    "zero_negative_quantity": {
+      "file": "zero_neg_qty.csv",
+      "format": "csv",
+      "expected_rejected_code": "INVALID_QUANTITY",
+      "description": "Orders with quantity 0 and -5"
+    },
+    "negative_price": {
+      "file": "negative_price.csv",
+      "format": "csv",
+      "expected_rejected_code": "NEGATIVE_PRICE",
+      "description": "Order with negative price -12.50"
+    },
+    "boundary_monetary_values": {
+      "file": "boundary_money.csv",
+      "format": "csv",
+      "expected_status": "SUCCESS",
+      "description": "Orders with 0.00 price, 999999.99 price, and drift-prone 0.10 * 3"
+    }
+  }
+}

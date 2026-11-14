@@ -1,0 +1,39 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.10.6, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Roshitha Akkina\AppData\Local\Programs\Python\Python310\python.exe
+cachedir: .pytest_cache
+rootdir: C:\CandidateWorkspace
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.6.2.post1
+collecting ... collected 28 items
+
+tests/test_pipeline.py::test_01_valid_csv_ingestion PASSED               [  3%]
+tests/test_pipeline.py::test_02_valid_json_ingestion PASSED              [  7%]
+tests/test_pipeline.py::test_03_empty_batch PASSED                       [ 10%]
+tests/test_pipeline.py::test_04_malformed_csv PASSED                     [ 14%]
+tests/test_pipeline.py::test_05_malformed_json PASSED                    [ 17%]
+tests/test_pipeline.py::test_06_missing_required_field PASSED            [ 21%]
+tests/test_pipeline.py::test_07_null_primary_key PASSED                  [ 25%]
+tests/test_pipeline.py::test_08_duplicate_source_key PASSED              [ 28%]
+tests/test_pipeline.py::test_09_duplicate_target_key PASSED              [ 32%]
+tests/test_pipeline.py::test_10_unexpected_extra_schema_column PASSED    [ 35%]
+tests/test_pipeline.py::test_11_missing_schema_column PASSED             [ 39%]
+tests/test_pipeline.py::test_12_wrong_data_type PASSED                   [ 42%]
+tests/test_pipeline.py::test_13_invalid_customer_foreign_key PASSED      [ 46%]
+tests/test_pipeline.py::test_14_invalid_product_foreign_key PASSED       [ 50%]
+tests/test_pipeline.py::test_15_zero_and_negative_quantity PASSED        [ 53%]
+tests/test_pipeline.py::test_16_negative_price PASSED                    [ 57%]
+tests/test_pipeline.py::test_17_boundary_monetary_values PASSED          [ 60%]
+tests/test_pipeline.py::test_18_late_out_of_order_events PASSED          [ 64%]
+tests/test_pipeline.py::test_19_identical_input_rerun_idempotency PASSED [ 67%]
+tests/test_pipeline.py::test_20_upsert_changed_record PASSED             [ 71%]
+tests/test_pipeline.py::test_21_append_semantics PASSED                  [ 75%]
+tests/test_pipeline.py::test_22_atomic_replace PASSED                    [ 78%]
+tests/test_pipeline.py::test_23_injected_partial_database_failure_and_retry PASSED [ 82%]
+tests/test_pipeline.py::test_24_reconciliation_invariants PASSED         [ 85%]
+tests/test_pipeline.py::test_25_audit_log_correctness PASSED             [ 89%]
+tests/test_pipeline.py::test_26_quarantine_traceability PASSED           [ 92%]
+tests/test_pipeline.py::test_27_config_validation_and_unsafe_identifiers PASSED [ 96%]
+tests/test_pipeline.py::test_28_large_data_generation_determinism PASSED [100%]
+
+============================= 28 passed in 1.50s ==============================
